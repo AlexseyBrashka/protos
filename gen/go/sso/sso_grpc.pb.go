@@ -4,7 +4,7 @@
 // - protoc             v6.30.2
 // source: sso/sso.proto
 
-package ssov1
+package ssov2
 
 import (
 	context "context"
@@ -19,10 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Register_FullMethodName = "/auth.Auth/Register"
-	Auth_Login_FullMethodName    = "/auth.Auth/Login"
-	Auth_IsAdmin_FullMethodName  = "/auth.Auth/IsAdmin"
-	Auth_Logout_FullMethodName   = "/auth.Auth/Logout"
+	Auth_Register_FullMethodName         = "/auth.Auth/Register"
+	Auth_Login_FullMethodName            = "/auth.Auth/Login"
+	Auth_Logout_FullMethodName           = "/auth.Auth/Logout"
+	Auth_AddPermission_FullMethodName    = "/auth.Auth/addPermission"
+	Auth_RemovePermission_FullMethodName = "/auth.Auth/removePermission"
+	Auth_GratePermission_FullMethodName  = "/auth.Auth/gratePermission"
+	Auth_RevokePermission_FullMethodName = "/auth.Auth/revokePermission"
 )
 
 // AuthClient is the client API for Auth service.
@@ -31,13 +34,13 @@ const (
 //
 // Auth is service for managing permissions and roles.
 type AuthClient interface {
-	// Register registers a new user.
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
-	// Login logs in a user and returns an auth token.
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	// IsAdmin checks whether a user is an admin.
-	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
+	AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error)
+	RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*RemovePermissionResponse, error)
+	GratePermission(ctx context.Context, in *GratePermissionRequest, opts ...grpc.CallOption) (*GratePermissionResponse, error)
+	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*RevokePermissionResponse, error)
 }
 
 type authClient struct {
@@ -68,20 +71,50 @@ func (c *authClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 	return out, nil
 }
 
-func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error) {
+func (c *authClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsAdminResponse)
-	err := c.cc.Invoke(ctx, Auth_IsAdmin_FullMethodName, in, out, cOpts...)
+	out := new(LogoutResponse)
+	err := c.cc.Invoke(ctx, Auth_Logout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
+func (c *authClient) AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LogoutResponse)
-	err := c.cc.Invoke(ctx, Auth_Logout_FullMethodName, in, out, cOpts...)
+	out := new(AddPermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_AddPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*RemovePermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemovePermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_RemovePermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) GratePermission(ctx context.Context, in *GratePermissionRequest, opts ...grpc.CallOption) (*GratePermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GratePermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_GratePermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*RevokePermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RevokePermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_RevokePermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,13 +127,13 @@ func (c *authClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 //
 // Auth is service for managing permissions and roles.
 type AuthServer interface {
-	// Register registers a new user.
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
-	// Login logs in a user and returns an auth token.
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	// IsAdmin checks whether a user is an admin.
-	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
+	AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error)
+	RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error)
+	GratePermission(context.Context, *GratePermissionRequest) (*GratePermissionResponse, error)
+	RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -117,11 +150,20 @@ func (UnimplementedAuthServer) Register(context.Context, *RegisterRequest) (*Reg
 func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
-}
 func (UnimplementedAuthServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
+}
+func (UnimplementedAuthServer) AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPermission not implemented")
+}
+func (UnimplementedAuthServer) RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePermission not implemented")
+}
+func (UnimplementedAuthServer) GratePermission(context.Context, *GratePermissionRequest) (*GratePermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GratePermission not implemented")
+}
+func (UnimplementedAuthServer) RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevokePermission not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -180,24 +222,6 @@ func _Auth_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsAdminRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthServer).IsAdmin(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Auth_IsAdmin_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).IsAdmin(ctx, req.(*IsAdminRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Auth_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LogoutRequest)
 	if err := dec(in); err != nil {
@@ -212,6 +236,78 @@ func _Auth_Logout_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServer).Logout(ctx, req.(*LogoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_AddPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).AddPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_AddPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).AddPermission(ctx, req.(*AddPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_RemovePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).RemovePermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_RemovePermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).RemovePermission(ctx, req.(*RemovePermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_GratePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GratePermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GratePermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GratePermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GratePermission(ctx, req.(*GratePermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_RevokePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokePermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).RevokePermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_RevokePermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).RevokePermission(ctx, req.(*RevokePermissionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -232,12 +328,24 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Auth_Login_Handler,
 		},
 		{
-			MethodName: "IsAdmin",
-			Handler:    _Auth_IsAdmin_Handler,
-		},
-		{
 			MethodName: "Logout",
 			Handler:    _Auth_Logout_Handler,
+		},
+		{
+			MethodName: "addPermission",
+			Handler:    _Auth_AddPermission_Handler,
+		},
+		{
+			MethodName: "removePermission",
+			Handler:    _Auth_RemovePermission_Handler,
+		},
+		{
+			MethodName: "gratePermission",
+			Handler:    _Auth_GratePermission_Handler,
+		},
+		{
+			MethodName: "revokePermission",
+			Handler:    _Auth_RevokePermission_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
