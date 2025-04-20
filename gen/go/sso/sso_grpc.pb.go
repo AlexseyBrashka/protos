@@ -24,7 +24,7 @@ const (
 	Auth_Logout_FullMethodName           = "/auth.Auth/Logout"
 	Auth_AddPermission_FullMethodName    = "/auth.Auth/addPermission"
 	Auth_RemovePermission_FullMethodName = "/auth.Auth/removePermission"
-	Auth_GratePermission_FullMethodName  = "/auth.Auth/gratePermission"
+	Auth_GrantPermission_FullMethodName  = "/auth.Auth/grantPermission"
 	Auth_RevokePermission_FullMethodName = "/auth.Auth/revokePermission"
 )
 
@@ -39,7 +39,7 @@ type AuthClient interface {
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error)
 	RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*RemovePermissionResponse, error)
-	GratePermission(ctx context.Context, in *GratePermissionRequest, opts ...grpc.CallOption) (*GratePermissionResponse, error)
+	GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*GrantPermissionResponse, error)
 	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*RevokePermissionResponse, error)
 }
 
@@ -101,10 +101,10 @@ func (c *authClient) RemovePermission(ctx context.Context, in *RemovePermissionR
 	return out, nil
 }
 
-func (c *authClient) GratePermission(ctx context.Context, in *GratePermissionRequest, opts ...grpc.CallOption) (*GratePermissionResponse, error) {
+func (c *authClient) GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*GrantPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GratePermissionResponse)
-	err := c.cc.Invoke(ctx, Auth_GratePermission_FullMethodName, in, out, cOpts...)
+	out := new(GrantPermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_GrantPermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type AuthServer interface {
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error)
 	RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error)
-	GratePermission(context.Context, *GratePermissionRequest) (*GratePermissionResponse, error)
+	GrantPermission(context.Context, *GrantPermissionRequest) (*GrantPermissionResponse, error)
 	RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
@@ -159,8 +159,8 @@ func (UnimplementedAuthServer) AddPermission(context.Context, *AddPermissionRequ
 func (UnimplementedAuthServer) RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePermission not implemented")
 }
-func (UnimplementedAuthServer) GratePermission(context.Context, *GratePermissionRequest) (*GratePermissionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GratePermission not implemented")
+func (UnimplementedAuthServer) GrantPermission(context.Context, *GrantPermissionRequest) (*GrantPermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GrantPermission not implemented")
 }
 func (UnimplementedAuthServer) RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevokePermission not implemented")
@@ -276,20 +276,20 @@ func _Auth_RemovePermission_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_GratePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GratePermissionRequest)
+func _Auth_GrantPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GrantPermissionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).GratePermission(ctx, in)
+		return srv.(AuthServer).GrantPermission(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_GratePermission_FullMethodName,
+		FullMethod: Auth_GrantPermission_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).GratePermission(ctx, req.(*GratePermissionRequest))
+		return srv.(AuthServer).GrantPermission(ctx, req.(*GrantPermissionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -340,8 +340,8 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Auth_RemovePermission_Handler,
 		},
 		{
-			MethodName: "gratePermission",
-			Handler:    _Auth_GratePermission_Handler,
+			MethodName: "grantPermission",
+			Handler:    _Auth_GrantPermission_Handler,
 		},
 		{
 			MethodName: "revokePermission",

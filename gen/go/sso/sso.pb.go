@@ -509,7 +509,7 @@ func (x *RemovePermissionResponse) GetSuccess() bool {
 	return false
 }
 
-type GratePermissionRequest struct {
+type GrantPermissionRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	PermissionUuid string                 `protobuf:"bytes,1,opt,name=permission_uuid,json=permissionUuid,proto3" json:"permission_uuid,omitempty"`
 	UserUuid       string                 `protobuf:"bytes,2,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
@@ -518,20 +518,20 @@ type GratePermissionRequest struct {
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *GratePermissionRequest) Reset() {
-	*x = GratePermissionRequest{}
+func (x *GrantPermissionRequest) Reset() {
+	*x = GrantPermissionRequest{}
 	mi := &file_sso_sso_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GratePermissionRequest) String() string {
+func (x *GrantPermissionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GratePermissionRequest) ProtoMessage() {}
+func (*GrantPermissionRequest) ProtoMessage() {}
 
-func (x *GratePermissionRequest) ProtoReflect() protoreflect.Message {
+func (x *GrantPermissionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -543,33 +543,33 @@ func (x *GratePermissionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GratePermissionRequest.ProtoReflect.Descriptor instead.
-func (*GratePermissionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GrantPermissionRequest.ProtoReflect.Descriptor instead.
+func (*GrantPermissionRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GratePermissionRequest) GetPermissionUuid() string {
+func (x *GrantPermissionRequest) GetPermissionUuid() string {
 	if x != nil {
 		return x.PermissionUuid
 	}
 	return ""
 }
 
-func (x *GratePermissionRequest) GetUserUuid() string {
+func (x *GrantPermissionRequest) GetUserUuid() string {
 	if x != nil {
 		return x.UserUuid
 	}
 	return ""
 }
 
-func (x *GratePermissionRequest) GetAppUuid() string {
+func (x *GrantPermissionRequest) GetAppUuid() string {
 	if x != nil {
 		return x.AppUuid
 	}
 	return ""
 }
 
-type GratePermissionResponse struct {
+type GrantPermissionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	NewToken      string                 `protobuf:"bytes,2,opt,name=newToken,proto3" json:"newToken,omitempty"`
@@ -577,20 +577,20 @@ type GratePermissionResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GratePermissionResponse) Reset() {
-	*x = GratePermissionResponse{}
+func (x *GrantPermissionResponse) Reset() {
+	*x = GrantPermissionResponse{}
 	mi := &file_sso_sso_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GratePermissionResponse) String() string {
+func (x *GrantPermissionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GratePermissionResponse) ProtoMessage() {}
+func (*GrantPermissionResponse) ProtoMessage() {}
 
-func (x *GratePermissionResponse) ProtoReflect() protoreflect.Message {
+func (x *GrantPermissionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -602,19 +602,19 @@ func (x *GratePermissionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GratePermissionResponse.ProtoReflect.Descriptor instead.
-func (*GratePermissionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GrantPermissionResponse.ProtoReflect.Descriptor instead.
+func (*GrantPermissionResponse) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *GratePermissionResponse) GetSuccess() bool {
+func (x *GrantPermissionResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
 	return false
 }
 
-func (x *GratePermissionResponse) GetNewToken() string {
+func (x *GrantPermissionResponse) GetNewToken() string {
 	if x != nil {
 		return x.NewToken
 	}
@@ -764,11 +764,11 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"4\n" +
 	"\x18removePermissionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"y\n" +
-	"\x16gratePermissionRequest\x12'\n" +
+	"\x16grantPermissionRequest\x12'\n" +
 	"\x0fpermission_uuid\x18\x01 \x01(\tR\x0epermissionUuid\x12\x1b\n" +
 	"\tuser_uuid\x18\x02 \x01(\tR\buserUuid\x12\x19\n" +
 	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"O\n" +
-	"\x17gratePermissionResponse\x12\x18\n" +
+	"\x17grantPermissionResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1a\n" +
 	"\bnewToken\x18\x02 \x01(\tR\bnewToken\"z\n" +
 	"\x17revokePermissionRequest\x12'\n" +
@@ -784,7 +784,7 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x14.auth.LogoutResponse\x12H\n" +
 	"\raddPermission\x12\x1a.auth.addPermissionRequest\x1a\x1b.auth.addPermissionResponse\x12Q\n" +
 	"\x10removePermission\x12\x1d.auth.removePermissionRequest\x1a\x1e.auth.removePermissionResponse\x12N\n" +
-	"\x0fgratePermission\x12\x1c.auth.gratePermissionRequest\x1a\x1d.auth.gratePermissionResponse\x12Q\n" +
+	"\x0fgrantPermission\x12\x1c.auth.grantPermissionRequest\x1a\x1d.auth.grantPermissionResponse\x12Q\n" +
 	"\x10revokePermission\x12\x1d.auth.revokePermissionRequest\x1a\x1e.auth.revokePermissionResponseB\x16Z\x14brashka.sso.v2;ssov2b\x06proto3"
 
 var (
@@ -811,8 +811,8 @@ var file_sso_sso_proto_goTypes = []any{
 	(*AddPermissionResponse)(nil),    // 7: auth.addPermissionResponse
 	(*RemovePermissionRequest)(nil),  // 8: auth.removePermissionRequest
 	(*RemovePermissionResponse)(nil), // 9: auth.removePermissionResponse
-	(*GratePermissionRequest)(nil),   // 10: auth.gratePermissionRequest
-	(*GratePermissionResponse)(nil),  // 11: auth.gratePermissionResponse
+	(*GrantPermissionRequest)(nil),   // 10: auth.grantPermissionRequest
+	(*GrantPermissionResponse)(nil),  // 11: auth.grantPermissionResponse
 	(*RevokePermissionRequest)(nil),  // 12: auth.revokePermissionRequest
 	(*RevokePermissionResponse)(nil), // 13: auth.revokePermissionResponse
 }
@@ -822,14 +822,14 @@ var file_sso_sso_proto_depIdxs = []int32{
 	4,  // 2: auth.Auth.Logout:input_type -> auth.LogoutRequest
 	6,  // 3: auth.Auth.addPermission:input_type -> auth.addPermissionRequest
 	8,  // 4: auth.Auth.removePermission:input_type -> auth.removePermissionRequest
-	10, // 5: auth.Auth.gratePermission:input_type -> auth.gratePermissionRequest
+	10, // 5: auth.Auth.grantPermission:input_type -> auth.grantPermissionRequest
 	12, // 6: auth.Auth.revokePermission:input_type -> auth.revokePermissionRequest
 	1,  // 7: auth.Auth.Register:output_type -> auth.RegisterResponse
 	3,  // 8: auth.Auth.Login:output_type -> auth.LoginResponse
 	5,  // 9: auth.Auth.Logout:output_type -> auth.LogoutResponse
 	7,  // 10: auth.Auth.addPermission:output_type -> auth.addPermissionResponse
 	9,  // 11: auth.Auth.removePermission:output_type -> auth.removePermissionResponse
-	11, // 12: auth.Auth.gratePermission:output_type -> auth.gratePermissionResponse
+	11, // 12: auth.Auth.grantPermission:output_type -> auth.grantPermissionResponse
 	13, // 13: auth.Auth.revokePermission:output_type -> auth.revokePermissionResponse
 	7,  // [7:14] is the sub-list for method output_type
 	0,  // [0:7] is the sub-list for method input_type
