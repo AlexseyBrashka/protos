@@ -12,8 +12,8 @@ service Auth {
   rpc Logout (LogoutRequest) returns (LogoutResponse);
   rpc addPermission (addPermissionRequest) returns (addPermissionResponse);
   rpc removePermission (removePermissionRequest) returns (removePermissionResponse);
-  rpc grantPermission (grantPermissionRequest) returns (grantPermissionResponse);
-  rpc revokePermission (revokePermissionRequest) returns (revokePermissionResponse);
+  rpc grantPermission (grantPermissionRequest) returns (LoginResponse);
+  rpc revokePermission (revokePermissionRequest) returns (LoginResponse);
 
 }
 
@@ -31,18 +31,12 @@ message LoginRequest {
   string password = 2;
   string app_uuid = 3;
 }
-
-message refreshTokenRequest {
-  string token = 1;
-}
-
-message refreshTokenResponse {
-  string token = 1;
-}
-
 message LoginResponse {
   string access_token = 1;
   string refresh_token  = 2;
+}
+message refreshTokenRequest {
+  string token = 1;
 }
 
 message LogoutRequest {
@@ -60,7 +54,7 @@ message addPermissionRequest {
 
 message addPermissionResponse {
   bool success = 1;
-  string permission_uuid = 2;
+  string permission_name = 2;
 }
 
 message removePermissionRequest {
@@ -73,21 +67,13 @@ message removePermissionResponse {
 }
 
 message grantPermissionRequest {
-  string permission_uuid = 1;
-  string user_uuid = 2;
+  string permission_name = 1;
+  string email = 2;
   string app_uuid = 3;
-}
-message grantPermissionResponse {
-  bool success = 1;
-  string newToken = 2;
 }
 
 message revokePermissionRequest {
-  string permission_uuid = 1;
-  string user_uuid = 2;
+  string permission_name = 1;
+  string email = 2;
   string app_uuid = 3;
-}
-message revokePermissionResponse {
-  bool success = 1;
-  string newToken = 2;
 }

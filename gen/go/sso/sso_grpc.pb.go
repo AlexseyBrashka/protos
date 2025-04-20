@@ -41,8 +41,8 @@ type AuthClient interface {
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error)
 	RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*RemovePermissionResponse, error)
-	GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*GrantPermissionResponse, error)
-	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*RevokePermissionResponse, error)
+	GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
 type authClient struct {
@@ -113,9 +113,9 @@ func (c *authClient) RemovePermission(ctx context.Context, in *RemovePermissionR
 	return out, nil
 }
 
-func (c *authClient) GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*GrantPermissionResponse, error) {
+func (c *authClient) GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GrantPermissionResponse)
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, Auth_GrantPermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -123,9 +123,9 @@ func (c *authClient) GrantPermission(ctx context.Context, in *GrantPermissionReq
 	return out, nil
 }
 
-func (c *authClient) RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*RevokePermissionResponse, error) {
+func (c *authClient) RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RevokePermissionResponse)
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, Auth_RevokePermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -145,8 +145,8 @@ type AuthServer interface {
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error)
 	RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error)
-	GrantPermission(context.Context, *GrantPermissionRequest) (*GrantPermissionResponse, error)
-	RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error)
+	GrantPermission(context.Context, *GrantPermissionRequest) (*LoginResponse, error)
+	RevokePermission(context.Context, *RevokePermissionRequest) (*LoginResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -175,10 +175,10 @@ func (UnimplementedAuthServer) AddPermission(context.Context, *AddPermissionRequ
 func (UnimplementedAuthServer) RemovePermission(context.Context, *RemovePermissionRequest) (*RemovePermissionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemovePermission not implemented")
 }
-func (UnimplementedAuthServer) GrantPermission(context.Context, *GrantPermissionRequest) (*GrantPermissionResponse, error) {
+func (UnimplementedAuthServer) GrantPermission(context.Context, *GrantPermissionRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GrantPermission not implemented")
 }
-func (UnimplementedAuthServer) RevokePermission(context.Context, *RevokePermissionRequest) (*RevokePermissionResponse, error) {
+func (UnimplementedAuthServer) RevokePermission(context.Context, *RevokePermissionRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevokePermission not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
