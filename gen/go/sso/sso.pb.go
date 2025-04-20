@@ -121,7 +121,7 @@ type LoginRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	AppUuid       int32                  `protobuf:"varint,3,opt,name=app_uuid,json=appUuid,proto3" json:"app_uuid,omitempty"`
+	AppUuid       string                 `protobuf:"bytes,3,opt,name=app_uuid,json=appUuid,proto3" json:"app_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -170,11 +170,11 @@ func (x *LoginRequest) GetPassword() string {
 	return ""
 }
 
-func (x *LoginRequest) GetAppUuid() int32 {
+func (x *LoginRequest) GetAppUuid() string {
 	if x != nil {
 		return x.AppUuid
 	}
-	return 0
+	return ""
 }
 
 type LoginResponse struct {
@@ -746,7 +746,7 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x19\n" +
-	"\bapp_uuid\x18\x03 \x01(\x05R\aappUuid\"%\n" +
+	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"%\n" +
 	"\rLoginResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"%\n" +
 	"\rLogoutRequest\x12\x14\n" +
