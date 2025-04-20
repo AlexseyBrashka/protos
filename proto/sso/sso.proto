@@ -8,11 +8,13 @@ option go_package = "brashka.sso.v2;ssov2";
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
+  rpc refreshToken (refreshTokenRequest) returns (LoginResponse);
   rpc Logout (LogoutRequest) returns (LogoutResponse);
   rpc addPermission (addPermissionRequest) returns (addPermissionResponse);
   rpc removePermission (removePermissionRequest) returns (removePermissionResponse);
   rpc grantPermission (grantPermissionRequest) returns (grantPermissionResponse);
   rpc revokePermission (revokePermissionRequest) returns (revokePermissionResponse);
+
 }
 
 message RegisterRequest {
@@ -30,8 +32,17 @@ message LoginRequest {
   string app_uuid = 3;
 }
 
-message LoginResponse {
+message refreshTokenRequest {
   string token = 1;
+}
+
+message refreshTokenResponse {
+  string token = 1;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token  = 2;
 }
 
 message LogoutRequest {
