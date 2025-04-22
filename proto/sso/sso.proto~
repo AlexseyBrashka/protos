@@ -24,6 +24,7 @@ message RegisterRequest {
 
 message RegisterResponse {
   string user_uuid = 1;
+  string err = 2;
 }
 
 message LoginRequest {
@@ -31,22 +32,22 @@ message LoginRequest {
   string password = 2;
   string app_uuid = 3;
 }
-
-message refreshTokenRequest {
-  string token = 1;
-}
-
 message LoginResponse {
   string access_token = 1;
   string refresh_token  = 2;
 }
+message refreshTokenRequest {
+  string token = 1;
+}
 
 message LogoutRequest {
-  string token = 1;
+  string email = 1;
+  string app_uuid = 2;
 }
 
 message LogoutResponse {
   bool success = 1;
+  string err = 2;
 }
 
 message addPermissionRequest {
@@ -56,16 +57,18 @@ message addPermissionRequest {
 
 message addPermissionResponse {
   bool success = 1;
-  string permission_name = 2;
+  string err = 2;
 }
 
 message removePermissionRequest {
   string permission_uuid = 1;
   string app_uuid = 2;
+  string err = 3;
 }
 
 message removePermissionResponse {
   bool success = 1;
+  string err = 2;
 }
 
 message grantPermissionRequest {
@@ -73,17 +76,9 @@ message grantPermissionRequest {
   string email = 2;
   string app_uuid = 3;
 }
-message grantPermissionResponse {
-  bool success = 1;
-  string newToken = 2;
-}
 
 message revokePermissionRequest {
   string permission_name = 1;
   string email = 2;
   string app_uuid = 3;
-}
-message revokePermissionResponse {
-  bool success = 1;
-  string newToken = 2;
 }

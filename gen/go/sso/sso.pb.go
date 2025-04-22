@@ -76,6 +76,7 @@ func (x *RegisterRequest) GetPassword() string {
 type RegisterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserUuid      string                 `protobuf:"bytes,1,opt,name=user_uuid,json=userUuid,proto3" json:"user_uuid,omitempty"`
+	Err           string                 `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -113,6 +114,13 @@ func (*RegisterResponse) Descriptor() ([]byte, []int) {
 func (x *RegisterResponse) GetUserUuid() string {
 	if x != nil {
 		return x.UserUuid
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetErr() string {
+	if x != nil {
+		return x.Err
 	}
 	return ""
 }
@@ -181,6 +189,7 @@ type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	Err           string                 `protobuf:"bytes,3,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -225,6 +234,13 @@ func (x *LoginResponse) GetAccessToken() string {
 func (x *LoginResponse) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetErr() string {
+	if x != nil {
+		return x.Err
 	}
 	return ""
 }
@@ -275,7 +291,8 @@ func (x *RefreshTokenRequest) GetToken() string {
 
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	AppUuid       string                 `protobuf:"bytes,2,opt,name=app_uuid,json=appUuid,proto3" json:"app_uuid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -310,9 +327,16 @@ func (*LogoutRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *LogoutRequest) GetToken() string {
+func (x *LogoutRequest) GetEmail() string {
 	if x != nil {
-		return x.Token
+		return x.Email
+	}
+	return ""
+}
+
+func (x *LogoutRequest) GetAppUuid() string {
+	if x != nil {
+		return x.AppUuid
 	}
 	return ""
 }
@@ -320,6 +344,7 @@ func (x *LogoutRequest) GetToken() string {
 type LogoutResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Err           string                 `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -359,6 +384,13 @@ func (x *LogoutResponse) GetSuccess() bool {
 		return x.Success
 	}
 	return false
+}
+
+func (x *LogoutResponse) GetErr() string {
+	if x != nil {
+		return x.Err
+	}
+	return ""
 }
 
 type AddPermissionRequest struct {
@@ -414,11 +446,11 @@ func (x *AddPermissionRequest) GetAppUuid() string {
 }
 
 type AddPermissionResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Success        bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	PermissionName string                 `protobuf:"bytes,2,opt,name=permission_name,json=permissionName,proto3" json:"permission_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Err           string                 `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AddPermissionResponse) Reset() {
@@ -458,9 +490,9 @@ func (x *AddPermissionResponse) GetSuccess() bool {
 	return false
 }
 
-func (x *AddPermissionResponse) GetPermissionName() string {
+func (x *AddPermissionResponse) GetErr() string {
 	if x != nil {
-		return x.PermissionName
+		return x.Err
 	}
 	return ""
 }
@@ -469,6 +501,7 @@ type RemovePermissionRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	PermissionUuid string                 `protobuf:"bytes,1,opt,name=permission_uuid,json=permissionUuid,proto3" json:"permission_uuid,omitempty"`
 	AppUuid        string                 `protobuf:"bytes,2,opt,name=app_uuid,json=appUuid,proto3" json:"app_uuid,omitempty"`
+	Err            string                 `protobuf:"bytes,3,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -517,9 +550,17 @@ func (x *RemovePermissionRequest) GetAppUuid() string {
 	return ""
 }
 
+func (x *RemovePermissionRequest) GetErr() string {
+	if x != nil {
+		return x.Err
+	}
+	return ""
+}
+
 type RemovePermissionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Err           string                 `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,6 +600,13 @@ func (x *RemovePermissionResponse) GetSuccess() bool {
 		return x.Success
 	}
 	return false
+}
+
+func (x *RemovePermissionResponse) GetErr() string {
+	if x != nil {
+		return x.Err
+	}
+	return ""
 }
 
 type GrantPermissionRequest struct {
@@ -688,33 +736,39 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\rsso/sso.proto\x12\x04auth\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"/\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"A\n" +
 	"\x10RegisterResponse\x12\x1b\n" +
-	"\tuser_uuid\x18\x01 \x01(\tR\buserUuid\"[\n" +
+	"\tuser_uuid\x18\x01 \x01(\tR\buserUuid\x12\x10\n" +
+	"\x03err\x18\x02 \x01(\tR\x03err\"[\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x19\n" +
-	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"W\n" +
+	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"i\n" +
 	"\rLoginResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"+\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x10\n" +
+	"\x03err\x18\x03 \x01(\tR\x03err\"+\n" +
 	"\x13refreshTokenRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"%\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"@\n" +
 	"\rLogoutRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"*\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12\x19\n" +
+	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"<\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"E\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
+	"\x03err\x18\x02 \x01(\tR\x03err\"E\n" +
 	"\x14addPermissionRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x19\n" +
-	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"Z\n" +
+	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"C\n" +
 	"\x15addPermissionResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12'\n" +
-	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\"]\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
+	"\x03err\x18\x02 \x01(\tR\x03err\"o\n" +
 	"\x17removePermissionRequest\x12'\n" +
 	"\x0fpermission_uuid\x18\x01 \x01(\tR\x0epermissionUuid\x12\x19\n" +
-	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"4\n" +
+	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\x12\x10\n" +
+	"\x03err\x18\x03 \x01(\tR\x03err\"F\n" +
 	"\x18removePermissionResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"r\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
+	"\x03err\x18\x02 \x01(\tR\x03err\"r\n" +
 	"\x16grantPermissionRequest\x12'\n" +
 	"\x0fpermission_name\x18\x01 \x01(\tR\x0epermissionName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x19\n" +
