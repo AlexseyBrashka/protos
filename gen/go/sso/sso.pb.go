@@ -584,16 +584,16 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x17revokePermissionRequest\x12'\n" +
 	"\x0fpermission_name\x18\x01 \x01(\tR\x0epermissionName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x19\n" +
-	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid2\x94\x04\n" +
+	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid2\x8c\x04\n" +
 	"\x04Auth\x12:\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x17.auth.OperationResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12>\n" +
 	"\frefreshToken\x12\x19.auth.refreshTokenRequest\x1a\x13.auth.LoginResponse\x126\n" +
 	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x17.auth.OperationResponse\x12D\n" +
 	"\raddPermission\x12\x1a.auth.addPermissionRequest\x1a\x17.auth.OperationResponse\x12J\n" +
-	"\x10removePermission\x12\x1d.auth.removePermissionRequest\x1a\x17.auth.OperationResponse\x12H\n" +
-	"\x0fgrantPermission\x12\x1c.auth.grantPermissionRequest\x1a\x17.auth.OperationResponse\x12J\n" +
-	"\x10revokePermission\x12\x1d.auth.revokePermissionRequest\x1a\x17.auth.OperationResponseB\x16Z\x14brashka.sso.v2;ssov2b\x06proto3"
+	"\x10removePermission\x12\x1d.auth.removePermissionRequest\x1a\x17.auth.OperationResponse\x12D\n" +
+	"\x0fgrantPermission\x12\x1c.auth.grantPermissionRequest\x1a\x13.auth.LoginResponse\x12F\n" +
+	"\x10revokePermission\x12\x1d.auth.revokePermissionRequest\x1a\x13.auth.LoginResponseB\x16Z\x14brashka.sso.v2;ssov2b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
@@ -635,8 +635,8 @@ var file_sso_sso_proto_depIdxs = []int32{
 	1, // 11: auth.Auth.Logout:output_type -> auth.OperationResponse
 	1, // 12: auth.Auth.addPermission:output_type -> auth.OperationResponse
 	1, // 13: auth.Auth.removePermission:output_type -> auth.OperationResponse
-	1, // 14: auth.Auth.grantPermission:output_type -> auth.OperationResponse
-	1, // 15: auth.Auth.revokePermission:output_type -> auth.OperationResponse
+	3, // 14: auth.Auth.grantPermission:output_type -> auth.LoginResponse
+	3, // 15: auth.Auth.revokePermission:output_type -> auth.LoginResponse
 	8, // [8:16] is the sub-list for method output_type
 	0, // [0:8] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

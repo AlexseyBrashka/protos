@@ -12,8 +12,8 @@ service Auth {
   rpc Logout (LogoutRequest) returns (OperationResponse);
   rpc addPermission (addPermissionRequest) returns (OperationResponse);
   rpc removePermission (removePermissionRequest) returns (OperationResponse);
-  rpc grantPermission (grantPermissionRequest) returns (OperationResponse);
-  rpc revokePermission (revokePermissionRequest) returns (OperationResponse);
+  rpc grantPermission (grantPermissionRequest) returns (LoginResponse);
+  rpc revokePermission (revokePermissionRequest) returns (LoginResponse);
 
 }
 
