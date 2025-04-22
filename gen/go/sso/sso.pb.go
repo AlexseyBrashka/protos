@@ -76,7 +76,6 @@ func (x *RegisterRequest) GetPassword() string {
 type OperationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Err           string                 `protobuf:"bytes,2,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,13 +115,6 @@ func (x *OperationResponse) GetSuccess() bool {
 		return x.Success
 	}
 	return false
-}
-
-func (x *OperationResponse) GetErr() string {
-	if x != nil {
-		return x.Err
-	}
-	return ""
 }
 
 type LoginRequest struct {
@@ -189,7 +181,6 @@ type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	Err           string                 `protobuf:"bytes,3,opt,name=err,proto3" json:"err,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -234,13 +225,6 @@ func (x *LoginResponse) GetAccessToken() string {
 func (x *LoginResponse) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
-	}
-	return ""
-}
-
-func (x *LoginResponse) GetErr() string {
-	if x != nil {
-		return x.Err
 	}
 	return ""
 }
@@ -572,18 +556,16 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\rsso/sso.proto\x12\x04auth\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"?\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"-\n" +
 	"\x11OperationResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x10\n" +
-	"\x03err\x18\x02 \x01(\tR\x03err\"[\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"[\n" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x19\n" +
-	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"i\n" +
+	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid\"W\n" +
 	"\rLoginResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x10\n" +
-	"\x03err\x18\x03 \x01(\tR\x03err\"+\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"+\n" +
 	"\x13refreshTokenRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"@\n" +
 	"\rLogoutRequest\x12\x14\n" +

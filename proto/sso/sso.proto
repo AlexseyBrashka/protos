@@ -24,7 +24,6 @@ message RegisterRequest {
 
 message OperationResponse {
   bool success = 1;
-  string err = 2;
 }
 
 message LoginRequest {
@@ -35,7 +34,6 @@ message LoginRequest {
 message LoginResponse {
   string access_token = 1;
   string refresh_token  = 2;
-  string err = 3;
 }
 message refreshTokenRequest {
   string token = 1;
