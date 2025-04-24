@@ -377,6 +377,50 @@ func (x *AddPermissionRequest) GetAppUuid() string {
 	return ""
 }
 
+type AddPermissionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UUID          string                 `protobuf:"bytes,1,opt,name=UUID,proto3" json:"UUID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddPermissionResponse) Reset() {
+	*x = AddPermissionResponse{}
+	mi := &file_sso_sso_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddPermissionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPermissionResponse) ProtoMessage() {}
+
+func (x *AddPermissionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPermissionResponse.ProtoReflect.Descriptor instead.
+func (*AddPermissionResponse) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddPermissionResponse) GetUUID() string {
+	if x != nil {
+		return x.UUID
+	}
+	return ""
+}
+
 type RemovePermissionRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	PermissionName string                 `protobuf:"bytes,1,opt,name=permission_name,json=permissionName,proto3" json:"permission_name,omitempty"`
@@ -387,7 +431,7 @@ type RemovePermissionRequest struct {
 
 func (x *RemovePermissionRequest) Reset() {
 	*x = RemovePermissionRequest{}
-	mi := &file_sso_sso_proto_msgTypes[7]
+	mi := &file_sso_sso_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -399,7 +443,7 @@ func (x *RemovePermissionRequest) String() string {
 func (*RemovePermissionRequest) ProtoMessage() {}
 
 func (x *RemovePermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[7]
+	mi := &file_sso_sso_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -412,7 +456,7 @@ func (x *RemovePermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePermissionRequest.ProtoReflect.Descriptor instead.
 func (*RemovePermissionRequest) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{7}
+	return file_sso_sso_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RemovePermissionRequest) GetPermissionName() string {
@@ -440,7 +484,7 @@ type GrantPermissionRequest struct {
 
 func (x *GrantPermissionRequest) Reset() {
 	*x = GrantPermissionRequest{}
-	mi := &file_sso_sso_proto_msgTypes[8]
+	mi := &file_sso_sso_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -452,7 +496,7 @@ func (x *GrantPermissionRequest) String() string {
 func (*GrantPermissionRequest) ProtoMessage() {}
 
 func (x *GrantPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[8]
+	mi := &file_sso_sso_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -465,7 +509,7 @@ func (x *GrantPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrantPermissionRequest.ProtoReflect.Descriptor instead.
 func (*GrantPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{8}
+	return file_sso_sso_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GrantPermissionRequest) GetPermissionName() string {
@@ -500,7 +544,7 @@ type RevokePermissionRequest struct {
 
 func (x *RevokePermissionRequest) Reset() {
 	*x = RevokePermissionRequest{}
-	mi := &file_sso_sso_proto_msgTypes[9]
+	mi := &file_sso_sso_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -512,7 +556,7 @@ func (x *RevokePermissionRequest) String() string {
 func (*RevokePermissionRequest) ProtoMessage() {}
 
 func (x *RevokePermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[9]
+	mi := &file_sso_sso_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -525,7 +569,7 @@ func (x *RevokePermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokePermissionRequest.ProtoReflect.Descriptor instead.
 func (*RevokePermissionRequest) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{9}
+	return file_sso_sso_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RevokePermissionRequest) GetPermissionName() string {
@@ -573,7 +617,9 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"Z\n" +
 	"\x14addPermissionRequest\x12'\n" +
 	"\x0fpermission_name\x18\x01 \x01(\tR\x0epermissionName\x12\x19\n" +
-	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"]\n" +
+	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"+\n" +
+	"\x15AddPermissionResponse\x12\x12\n" +
+	"\x04UUID\x18\x01 \x01(\tR\x04UUID\"]\n" +
 	"\x17removePermissionRequest\x12'\n" +
 	"\x0fpermission_name\x18\x01 \x01(\tR\x0epermissionName\x12\x19\n" +
 	"\bapp_uuid\x18\x02 \x01(\tR\aappUuid\"r\n" +
@@ -584,13 +630,13 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x17revokePermissionRequest\x12'\n" +
 	"\x0fpermission_name\x18\x01 \x01(\tR\x0epermissionName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x19\n" +
-	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid2\x8c\x04\n" +
+	"\bapp_uuid\x18\x03 \x01(\tR\aappUuid2\x90\x04\n" +
 	"\x04Auth\x12:\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x17.auth.OperationResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12>\n" +
 	"\frefreshToken\x12\x19.auth.refreshTokenRequest\x1a\x13.auth.LoginResponse\x126\n" +
-	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x17.auth.OperationResponse\x12D\n" +
-	"\raddPermission\x12\x1a.auth.addPermissionRequest\x1a\x17.auth.OperationResponse\x12J\n" +
+	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x17.auth.OperationResponse\x12H\n" +
+	"\raddPermission\x12\x1a.auth.addPermissionRequest\x1a\x1b.auth.AddPermissionResponse\x12J\n" +
 	"\x10removePermission\x12\x1d.auth.removePermissionRequest\x1a\x17.auth.OperationResponse\x12D\n" +
 	"\x0fgrantPermission\x12\x1c.auth.grantPermissionRequest\x1a\x13.auth.LoginResponse\x12F\n" +
 	"\x10revokePermission\x12\x1d.auth.revokePermissionRequest\x1a\x13.auth.LoginResponseB\x16Z\x14brashka.sso.v2;ssov2b\x06proto3"
@@ -607,7 +653,7 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),         // 0: auth.RegisterRequest
 	(*OperationResponse)(nil),       // 1: auth.OperationResponse
@@ -616,32 +662,33 @@ var file_sso_sso_proto_goTypes = []any{
 	(*RefreshTokenRequest)(nil),     // 4: auth.refreshTokenRequest
 	(*LogoutRequest)(nil),           // 5: auth.LogoutRequest
 	(*AddPermissionRequest)(nil),    // 6: auth.addPermissionRequest
-	(*RemovePermissionRequest)(nil), // 7: auth.removePermissionRequest
-	(*GrantPermissionRequest)(nil),  // 8: auth.grantPermissionRequest
-	(*RevokePermissionRequest)(nil), // 9: auth.revokePermissionRequest
+	(*AddPermissionResponse)(nil),   // 7: auth.AddPermissionResponse
+	(*RemovePermissionRequest)(nil), // 8: auth.removePermissionRequest
+	(*GrantPermissionRequest)(nil),  // 9: auth.grantPermissionRequest
+	(*RevokePermissionRequest)(nil), // 10: auth.revokePermissionRequest
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	0, // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
-	2, // 1: auth.Auth.Login:input_type -> auth.LoginRequest
-	4, // 2: auth.Auth.refreshToken:input_type -> auth.refreshTokenRequest
-	5, // 3: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	6, // 4: auth.Auth.addPermission:input_type -> auth.addPermissionRequest
-	7, // 5: auth.Auth.removePermission:input_type -> auth.removePermissionRequest
-	8, // 6: auth.Auth.grantPermission:input_type -> auth.grantPermissionRequest
-	9, // 7: auth.Auth.revokePermission:input_type -> auth.revokePermissionRequest
-	1, // 8: auth.Auth.Register:output_type -> auth.OperationResponse
-	3, // 9: auth.Auth.Login:output_type -> auth.LoginResponse
-	3, // 10: auth.Auth.refreshToken:output_type -> auth.LoginResponse
-	1, // 11: auth.Auth.Logout:output_type -> auth.OperationResponse
-	1, // 12: auth.Auth.addPermission:output_type -> auth.OperationResponse
-	1, // 13: auth.Auth.removePermission:output_type -> auth.OperationResponse
-	3, // 14: auth.Auth.grantPermission:output_type -> auth.LoginResponse
-	3, // 15: auth.Auth.revokePermission:output_type -> auth.LoginResponse
-	8, // [8:16] is the sub-list for method output_type
-	0, // [0:8] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
+	2,  // 1: auth.Auth.Login:input_type -> auth.LoginRequest
+	4,  // 2: auth.Auth.refreshToken:input_type -> auth.refreshTokenRequest
+	5,  // 3: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	6,  // 4: auth.Auth.addPermission:input_type -> auth.addPermissionRequest
+	8,  // 5: auth.Auth.removePermission:input_type -> auth.removePermissionRequest
+	9,  // 6: auth.Auth.grantPermission:input_type -> auth.grantPermissionRequest
+	10, // 7: auth.Auth.revokePermission:input_type -> auth.revokePermissionRequest
+	1,  // 8: auth.Auth.Register:output_type -> auth.OperationResponse
+	3,  // 9: auth.Auth.Login:output_type -> auth.LoginResponse
+	3,  // 10: auth.Auth.refreshToken:output_type -> auth.LoginResponse
+	1,  // 11: auth.Auth.Logout:output_type -> auth.OperationResponse
+	7,  // 12: auth.Auth.addPermission:output_type -> auth.AddPermissionResponse
+	1,  // 13: auth.Auth.removePermission:output_type -> auth.OperationResponse
+	3,  // 14: auth.Auth.grantPermission:output_type -> auth.LoginResponse
+	3,  // 15: auth.Auth.revokePermission:output_type -> auth.LoginResponse
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_sso_sso_proto_init() }
@@ -655,7 +702,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

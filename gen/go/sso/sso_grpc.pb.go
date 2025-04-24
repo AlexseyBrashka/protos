@@ -39,7 +39,7 @@ type AuthClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*OperationResponse, error)
-	AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*OperationResponse, error)
+	AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error)
 	RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*OperationResponse, error)
 	GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
@@ -93,9 +93,9 @@ func (c *authClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc
 	return out, nil
 }
 
-func (c *authClient) AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*OperationResponse, error) {
+func (c *authClient) AddPermission(ctx context.Context, in *AddPermissionRequest, opts ...grpc.CallOption) (*AddPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OperationResponse)
+	out := new(AddPermissionResponse)
 	err := c.cc.Invoke(ctx, Auth_AddPermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ type AuthServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*LoginResponse, error)
 	Logout(context.Context, *LogoutRequest) (*OperationResponse, error)
-	AddPermission(context.Context, *AddPermissionRequest) (*OperationResponse, error)
+	AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error)
 	RemovePermission(context.Context, *RemovePermissionRequest) (*OperationResponse, error)
 	GrantPermission(context.Context, *GrantPermissionRequest) (*LoginResponse, error)
 	RevokePermission(context.Context, *RevokePermissionRequest) (*LoginResponse, error)
@@ -169,7 +169,7 @@ func (UnimplementedAuthServer) RefreshToken(context.Context, *RefreshTokenReques
 func (UnimplementedAuthServer) Logout(context.Context, *LogoutRequest) (*OperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
-func (UnimplementedAuthServer) AddPermission(context.Context, *AddPermissionRequest) (*OperationResponse, error) {
+func (UnimplementedAuthServer) AddPermission(context.Context, *AddPermissionRequest) (*AddPermissionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddPermission not implemented")
 }
 func (UnimplementedAuthServer) RemovePermission(context.Context, *RemovePermissionRequest) (*OperationResponse, error) {

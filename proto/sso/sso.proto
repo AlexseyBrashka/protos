@@ -10,7 +10,7 @@ service Auth {
   rpc Login (LoginRequest) returns (LoginResponse);
   rpc refreshToken (refreshTokenRequest) returns (LoginResponse);
   rpc Logout (LogoutRequest) returns (OperationResponse);
-  rpc addPermission (addPermissionRequest) returns (OperationResponse);
+  rpc addPermission (addPermissionRequest) returns (AddPermissionResponse);
   rpc removePermission (removePermissionRequest) returns (OperationResponse);
   rpc grantPermission (grantPermissionRequest) returns (LoginResponse);
   rpc revokePermission (revokePermissionRequest) returns (LoginResponse);
@@ -47,6 +47,9 @@ message LogoutRequest {
 message addPermissionRequest {
   string permission_name = 1;
   string app_uuid = 2;
+}
+message AddPermissionResponse{
+  string UUID = 1;
 }
 
 message removePermissionRequest {
