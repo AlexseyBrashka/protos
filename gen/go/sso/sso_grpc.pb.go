@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Register_FullMethodName         = "/auth.Auth/Register"
-	Auth_Login_FullMethodName            = "/auth.Auth/Login"
-	Auth_RefreshToken_FullMethodName     = "/auth.Auth/refreshToken"
-	Auth_Logout_FullMethodName           = "/auth.Auth/Logout"
-	Auth_AddPermission_FullMethodName    = "/auth.Auth/addPermission"
-	Auth_RemovePermission_FullMethodName = "/auth.Auth/removePermission"
-	Auth_GrantPermission_FullMethodName  = "/auth.Auth/grantPermission"
-	Auth_RevokePermission_FullMethodName = "/auth.Auth/revokePermission"
+	Auth_Register_FullMethodName          = "/auth.Auth/Register"
+	Auth_Login_FullMethodName             = "/auth.Auth/Login"
+	Auth_RefreshToken_FullMethodName      = "/auth.Auth/refreshToken"
+	Auth_Logout_FullMethodName            = "/auth.Auth/Logout"
+	Auth_AddPermission_FullMethodName     = "/auth.Auth/addPermission"
+	Auth_RemovePermission_FullMethodName  = "/auth.Auth/removePermission"
+	Auth_GrantPermission_FullMethodName   = "/auth.Auth/grantPermission"
+	Auth_RevokePermission_FullMethodName  = "/auth.Auth/revokePermission"
+	Auth_GetAppPermissions_FullMethodName = "/auth.Auth/getAppPermissions"
 )
 
 // AuthClient is the client API for Auth service.
@@ -43,6 +44,7 @@ type AuthClient interface {
 	RemovePermission(ctx context.Context, in *RemovePermissionRequest, opts ...grpc.CallOption) (*OperationResponse, error)
 	GrantPermission(ctx context.Context, in *GrantPermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RevokePermission(ctx context.Context, in *RevokePermissionRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	GetAppPermissions(ctx context.Context, in *GetAppPermissionsRequest, opts ...grpc.CallOption) (*GetAppPermissionsResponse, error)
 }
 
 type authClient struct {
@@ -133,6 +135,16 @@ func (c *authClient) RevokePermission(ctx context.Context, in *RevokePermissionR
 	return out, nil
 }
 
+func (c *authClient) GetAppPermissions(ctx context.Context, in *GetAppPermissionsRequest, opts ...grpc.CallOption) (*GetAppPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppPermissionsResponse)
+	err := c.cc.Invoke(ctx, Auth_GetAppPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
@@ -147,6 +159,7 @@ type AuthServer interface {
 	RemovePermission(context.Context, *RemovePermissionRequest) (*OperationResponse, error)
 	GrantPermission(context.Context, *GrantPermissionRequest) (*LoginResponse, error)
 	RevokePermission(context.Context, *RevokePermissionRequest) (*LoginResponse, error)
+	GetAppPermissions(context.Context, *GetAppPermissionsRequest) (*GetAppPermissionsResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -180,6 +193,9 @@ func (UnimplementedAuthServer) GrantPermission(context.Context, *GrantPermission
 }
 func (UnimplementedAuthServer) RevokePermission(context.Context, *RevokePermissionRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevokePermission not implemented")
+}
+func (UnimplementedAuthServer) GetAppPermissions(context.Context, *GetAppPermissionsRequest) (*GetAppPermissionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAppPermissions not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -346,6 +362,24 @@ func _Auth_RevokePermission_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_GetAppPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetAppPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetAppPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetAppPermissions(ctx, req.(*GetAppPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -384,6 +418,10 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "revokePermission",
 			Handler:    _Auth_RevokePermission_Handler,
+		},
+		{
+			MethodName: "getAppPermissions",
+			Handler:    _Auth_GetAppPermissions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
