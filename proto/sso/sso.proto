@@ -71,8 +71,12 @@ message revokePermissionRequest {
 }
 
 message getAppPermissionsRequest{
-  string appUUID =3;
+  string appUUID = 3;
 }
 message getAppPermissionsResponse{
-  repeated string UUIDS = 1;
+  repeated perm permissions = 1;
+}
+message perm{
+  string UUID = 1;
+  string name = 2;
 }
